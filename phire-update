@@ -1,5 +1,10 @@
 #!/bin/bash
 
+if [ ! -f ".config" ]; then
+    echo "The config file was not found."
+    exit 0
+fi
+
 source .config
 
 for DIR in "${DIRS[@]}"; do
