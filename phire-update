@@ -8,6 +8,7 @@ for DIR in "${DIRS[@]}"; do
     rm -fr "$PHIRE"
     wget http://updates.phirecms.org/releases/phire/phirecms.zip
     unzip phirecms.zip
+    rm phirecms.zip
     cd "$PHIRE_CONTENT/assets"
     rm -fr ./*
     cp ../index.html .
@@ -26,6 +27,7 @@ for DIR in "${DIRS[@]}"; do
     fi
 
     cd "$DIR"
+    chown -R "$OWNER" ./*
     chmod -R 777 "$PHIRE_CONTENT"
 done
 
