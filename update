@@ -11,16 +11,21 @@ for DIR in "${DIRS[@]}"; do
     cd "$PHIRE_CONTENT/assets"
     rm -fr ./*
     cp ../index.html .
-    cd ../modules
-    MODULES=$(ls)
-    rm -fr ./phire-*
-    for M in $MODULES; do
-        if [[ $M == *".zip"* ]]; then
-            wget "http://updates.phirecms.org/releases/modules/$M"
-            unzip "$M"
-        fi
-    done
-    cd ../../
+
+    if [ "$1" = "-m" ]; then
+        echo "Updating Modules..."
+        cd ../modules
+        MODULES=$(ls)
+        rm -fr ./phire-*
+        for M in $MODULES; do
+            if [[ $M == *".zip"* ]]; then
+                wget "http://updates.phirecms.org/releases/modules/$M"
+                unzip "$M"
+            fi
+        done
+    fi
+
+    cd "$DIR"
     chmod -R 777 "$PHIRE_CONTENT"
 done
 
