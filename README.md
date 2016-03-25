@@ -1,2 +1,4 @@
-# phire-cli-updater
+Phire CLI Updater
+=================
+
 CLI-Based Root Updater for Phire CMS 2

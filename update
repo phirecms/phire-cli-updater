@@ -1,0 +1,27 @@
+#!/bin/bash
+
+source .config
+
+for DIR in "${DIRS[@]}"; do
+    echo "Updating: $DIR..."
+    cd "$DIR"
+    rm -fr "$PHIRE"
+    wget http://updates.phirecms.org/releases/phire/phirecms.zip
+    unzip phirecms.zip
+    cd "$PHIRE_CONTENT/assets"
+    rm -fr ./*
+    cp ../index.html .
+    cd ../modules
+    MODULES=$(ls)
+    rm -fr ./phire-*
+    for M in $MODULES; do
+        if [[ $M == *".zip"* ]]; then
+            wget "http://updates.phirecms.org/releases/modules/$M"
+            unzip "$M"
+        fi
+    done
+    cd ../../
+    chmod -R 777 "$PHIRE_CONTENT"
+done
+
+echo "Complete!"
